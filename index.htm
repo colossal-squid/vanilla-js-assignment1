@@ -1,0 +1,91 @@
+<html>
+<head> </head>
+<body></body>
+<script>
+'use strict'
+let before = Date.now();
+function randomString(length, chars) {
+  let string = ''
+  for (let i = 0; i < length; i++) {
+    string += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return string
+}
+let words = [];
+function containsStr(word, key){
+  	if (word.length < key.length){
+  		return false; // if key length > word length - we can skip the iteration
+  	}
+  	if (word === key || word.indexOf(key)!== -1){
+  		return true; // another shortcut cornercase
+  	}
+  	const keyLength = key.length;
+  	for (let charIdx=0; charIdx<keyLength; charIdx++){
+  		let char = key.charAt(charIdx);
+  		if (word.indexOf( char ) === -1){
+  			return false;
+  		} else {
+  			word = removeChar(word, char);
+  		}
+  	}
+  	return true;
+  }
+
+/**
+ * Removes a first inclusion of char in a string
+**/
+function _removeChar(word, char){
+	return word.substring(0, word.indexOf(char)) + word.substring(word.indexOf(char) + 1, word.length);
+}
+
+/**
+  * Removes a first inclusion of char in a string
+**/
+function removeChar(word, char){
+	const charArray = word.split('');
+	if (charArray.length != word.length ){
+		throw new Error('Opa opa opapa!');
+	}
+	charArray.splice(charArray.indexOf(char), 1);
+	return charArray.join('');
+}
+
+// your solution
+class Finder{
+  	
+  // write the code to initialize your class here
+  // the input is and array of string ex. ["asd", "wer"]
+  constructor(arr) {
+  	words = arr;
+  }
+
+  // write you code to get subset of initial array with given key
+  // key is always string ex. "asd"
+  find(key) {
+  	let result = [];
+	
+    for (let i=0; i<words.length; i++){
+    	const word = words[i];
+    	const isValid = containsStr(word, key);
+    	if (isValid) {
+    		result.push(word);
+    	}
+    }
+      return result;
+  }
+
+}
+
+
+
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const input = []
+    for (let i = 0; i < 50000; i++) {
+      input.push(randomString(Math.random() * 5, chars))
+    }
+    const finder = new Finder(input)
+    let res = finder.find(input[10])
+console.log(res);
+console.log(Date.now() - before);
+</script>
+</html>

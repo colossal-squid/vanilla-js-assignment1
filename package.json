@@ -1,0 +1,23 @@
+{
+  "name": "onboardingtest",
+  "version": "1.0.0",
+  "description": "Relayr Onboarding test",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-mocha": "^3.0.1",
+    "should": "^11.1.2"
+  },
+  "devDependencies": {
+    "should-sinon": "0.0.5",
+    "sinon": "^2.4.1"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "license": "ISC"
+}
